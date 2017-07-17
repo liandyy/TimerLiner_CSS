@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="HandheldFriendly" content="true">
+	<link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+	<div class="time_line_box">
+	 <div class="time_line" style="width:100%;">
+	 	<div class="time_line_background" style="transform:scaleX(0.97); ">
+	 		<span class="filling_line"></span>
+	 	<ol  class="ol">
+	 		<li><a   class="order_item " onclick="run(0)" style="left:0%;"></a></li>
+			<li><div class="order_item " onclick="run(1)" style="left:17%;"></div></li>
+			<li><div   class="order_item " onclick="run(2)" style="left:34%;"></div></li>
+			<li><div  class="order_item " onclick="run(3)" style="left:51%;"></div></li>
+			<li><div   class="order_item " onclick="run(4)" style="left:68%;"></div></li>
+			<li><div  class="order_item " onclick="run(5)" style="left:85%;"></div></li>
+			<li><div class="order_item " onclick="run(6)" style="left:99.5%;"></div></li>
+			</ol>
+	 	</div>
+	 	<ol>
+			<li><a 	class="text_item"  style="left:0%;">Today</a></li>
+			<li><a  class="text_item"  style="left:16.5%;">2Days</a></li>
+			<li><a  class="text_item"  style="left:33%;">3Days</a></li>
+			<li><a  class="text_item"  style="left:49.5%;">4Days</a></li>
+			<li><a 	class="text_item"  style="left:66%;">5Days</a></li>
+			<li><a 	class="text_item"  style="left:82.6%;">6Days</a></li>
+			<li><a 	class="text_item"  style="left:96%;">7Days</a></li>
+		</ol>
+	 </div>
+	</div>
+	<script type="text/javascript">
+		function hasClass(elem, cls) {
+		  cls = cls || '';
+		  if (cls.replace(/\s/g, '').length == 0) return false; //当cls没有参数时，返回false
+		  return new RegExp(' ' + cls + ' ').test(' ' + elem.className + ' ');
+		}
+		 
+		function addClass(elem, cls) {
+		  if (!hasClass(elem, cls)) {
+		    elem.className = elem.className == '' ? cls : elem.className + ' ' + cls;
+		  }
+		}
+		 
+		function removeClass(elem, cls) {
+		  if (hasClass(elem, cls)) {
+		    var newClass = ' ' + elem.className.replace(/[\t\r\n]/g, '') + ' ';
+		    while (newClass.indexOf(' ' + cls + ' ') >= 0) {
+		      newClass = newClass.replace(' ' + cls + ' ', ' ');
+		    }
+		    elem.className = newClass.replace(/^\s+|\s+$/g, '');
+		  }
+		}
+
+		function run(statue) {
+			if(!statue)statue =0;
+			var timeLine =document.getElementsByClassName('filling_line')[0];
+			for (var i = 0; i<=statue; i++) {
+				xScale = 17*i;
+				if (i ===6){
+					timeLine.style.transform="scaleX(1)";
+				}else{
+					timeLine.style.transform="scaleX(0."+xScale+")";
+				}
+			}
+
+			var order_itemArray = document.querySelectorAll('.order_item');
+			for(var j =0;j < order_itemArray.length;j++) {
+				removeClass(order_itemArray[j],'current');
+				removeClass(order_itemArray[j],'selected');
+			}
+			for(var j =0;j <=statue;j++) {
+				addClass(order_itemArray[j],'selected');
+				if(j ===statue ||statue===0 )
+					addClass(order_itemArray[j],'current');
+			}
+
+			// if(statue ==='0'){
+			// 	timeLine.style.transform ="scaleX(0.0)";
+			// 	var item1 =document.getElementById("item1");
+			// 	addClass(item1,'selected');
+			// 	addClass(item1,'current');	
+			// }else if(statue ==='1'){
+			// 	timeLine.style.transform ="scaleX(0.17)";
+			// }else if(statue ==='2'){
+			// 	timeLine.style.transform ="scaleX(0.34)";
+			// }else if(statue ==='3'){
+			// 	timeLine.style.transform ="scaleX(0.51)";
+			// }else if(statue ==='4'){
+			// 	timeLine.style.transform ="scaleX(0.68";
+			// }else if(statue ==='5'){
+			// 	timeLine.style.transform ="scaleX(0.85";
+			// }else if(statue ==='6'){
+			// 	timeLine.style.transform ="scaleX(1)";
+			// }
+		};
+		// var i=0;
+		// setInterval(function(){			
+		// 	if(i===7)
+		// 		i=0;
+		// 	run(i);
+		// 	i++;
+		// },2000);
+
+		// run(1);
+	</script>
+</body>
+</html>
+
+				
